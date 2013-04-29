@@ -113,23 +113,6 @@ cd openinfobutton
 
 # Clean & install each project
 cd infobutton-db
-#hack to build:
-# search </project>
-# replace with:
-#        <build>
-#                <plugins>
-#                        <plugin>
-#                                <artifactId>maven-compiler-plugin</artifactId>
-#                                <configuration>
-#                                        <source>1.6</source>
-#                                        <target>1.6</target>
-#                                </configuration>
-#                        </plugin>
-#                </plugins>
-#        </build>
-#</project>
-sed -i 's#</project>#\t<build>\n\t\t<plugins>\n\t\t\t<plugin>\n\t\t\t\t<artifactId>maven-compiler-plugin</artifactId>\n\t\t\t\t<configuration>\n\t\t\t\t\t<source>1.6</source>\n\t\t\t\t\t<target>1.6</target>\n\t\t\t\t</configuration>\n\t\t\t</plugin>\n\t\t</plugins>\n\t</build>\n</project>#' pom.xml
-
 mvn22 clean
 mvn22 install
 if [ ! -f "target/infobutton-db-0.0.1-SNAPSHOT.jar" ]
@@ -137,6 +120,7 @@ then
     echo "Infobutton-db build failed, Quitting"
     exit
 fi
+
 cd ../infobutton-kbschema
 mvn22 clean
 mvn22 install
@@ -147,15 +131,6 @@ then
 fi
 
 cd ../infobutton-schema
-# hack to build:
-# replace incorrect slashes
-# search <schemaDirectory>src\main\resources\</schemaDirectory>
-# replace <schemaDirectory>src/main/resources/</schemaDirectory>
-sed -i 's#<schemaDirectory>src\\main\\resources\\</schemaDirectory>#<schemaDirectory>src/main/resources/</schemaDirectory>#' pom.xml
-
-# search <outputDirectory>src\main\java</outputDirectory>
-# replace <outputDirectory>src/main/java</outputDirectory>
-sed -i 's#<outputDirectory>src\\main\\java</outputDirectory>#<outputDirectory>src/main/java</outputDirectory>#' pom.xml
 mvn22 clean
 mvn22 install
 if [ ! -f "target/infobutton-schema-0.0.1-SNAPSHOT.jar" ]
@@ -165,22 +140,6 @@ then
 fi
 
 cd ../inference-rxnorm
-#hack to build:
-# search </project>
-# replace with:
-#        <build>
-#                <plugins>
-#                        <plugin>
-#                                <artifactId>maven-compiler-plugin</artifactId>
-#                                <configuration>
-#                                        <source>1.6</source>
-#                                        <target>1.6</target>
-#                                </configuration>
-#                        </plugin>
-#                </plugins>
-#        </build>
-#</project>
-sed -i 's#</project>#\t<build>\n\t\t<plugins>\n\t\t\t<plugin>\n\t\t\t\t<artifactId>maven-compiler-plugin</artifactId>\n\t\t\t\t<configuration>\n\t\t\t\t\t<source>1.6</source>\n\t\t\t\t\t<target>1.6</target>\n\t\t\t\t</configuration>\n\t\t\t</plugin>\n\t\t</plugins>\n\t</build>\n</project>#' pom.xml
 mvn22 clean
 mvn22 install
 if [ ! -f "target/inference-rxnorm-0.0.1-SNAPSHOT.jar" ]
@@ -199,23 +158,6 @@ then
 fi
 
 cd ../infobutton-externalresources
-#hack to build:
-# search </project>
-# replace with:
-#        <build>
-#                <plugins>
-#                        <plugin>
-#                                <artifactId>maven-compiler-plugin</artifactId>
-#                                <configuration>
-#                                        <source>1.6</source>
-#                                        <target>1.6</target>
-#                                </configuration>
-#                        </plugin>
-#                </plugins>
-#        </build>
-#</project>
-sed -i 's#</project>#\t<build>\n\t\t<plugins>\n\t\t\t<plugin>\n\t\t\t\t<artifactId>maven-compiler-plugin</artifactId>\n\t\t\t\t<configuration>\n\t\t\t\t\t<source>1.6</source>\n\t\t\t\t\t<target>1.6</target>\n\t\t\t\t</configuration>\n\t\t\t</plugin>\n\t\t</plugins>\n\t</build>\n</project>#' pom.xml
-
 mvn22 clean
 mvn22 install
 if [ ! -f "target/infobutton-externalresources-0.0.1-SNAPSHOT.jar" ]
@@ -226,7 +168,7 @@ fi
 
 cd ../infobutton-service
 mvn22 clean
-ECHO You can customize the WebApp by editing src/main/webapp/*.html
+echo You can customize the WebApp by editing src/main/webapp/*.html
 #recommended search/replace
 #search <option value="http://dev-service.oib.utah.edu:8080/infobutton-service/infoRequest?">Development</option>
 # replace <option value="http://localhost:8080/infobutton-service/infoRequest?">Local Development</option>
